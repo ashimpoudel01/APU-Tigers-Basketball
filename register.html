@@ -33,7 +33,71 @@
     <main class="main-content">
       <div class="page-hero"><div class="container-custom"><h1 class="page-title">Join the <span class="text-secondary">Tigers</span></h1><p class="page-subtitle">Start your basketball journey today</p></div></div>
       <section class="section-padding"><div class="container-custom"><div class="section-header"><h2 class="section-title">Registration Form</h2><p class="section-subtitle">Tell us a bit about yourself</p></div>
-        <form id="register-form"><div class="mission-vision-grid"><div class="mission-card"><label for="fullName" class="mission-title">Full Name</label><input id="fullName" name="fullName" type="text" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;"></div><div class="mission-card"><label for="emailReg" class="mission-title">Email</label><input id="emailReg" name="emailReg" type="email" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;"></div><div class="mission-card"><label for="position" class="mission-title">Preferred Position</label><select id="position" name="position" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;"><option value="">Select...</option><option>Point Guard</option><option>Shooting Guard</option><option>Small Forward</option><option>Power Forward</option><option>Center</option></select></div><div class="mission-card" style="grid-column:1 / -1;"><label for="notes" class="mission-title">Notes</label><textarea id="notes" name="notes" rows="4" style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;"></textarea></div></div><div class="section-footer"><button type="submit" class="btn-hero">Submit Registration</button></div></form>
+        <form id="register-form">
+          <div class="mission-vision-grid">
+            <div class="mission-card">
+              <label for="full-name" class="mission-title">Full Name *</label>
+              <input id="full-name" name="fullName" type="text" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+            </div>
+            <div class="mission-card">
+              <label for="student-id" class="mission-title">Student ID *</label>
+              <input id="student-id" name="studentId" type="text" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+            </div>
+            <div class="mission-card">
+              <label for="reg-email" class="mission-title">Email *</label>
+              <input id="reg-email" name="email" type="email" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+            </div>
+            <div class="mission-card">
+              <label for="phone" class="mission-title">Phone Number *</label>
+              <input id="phone" name="phone" type="tel" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+            </div>
+            <div class="mission-card">
+              <label for="experience" class="mission-title">Experience Level</label>
+              <select id="experience" name="experience" style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                <option value="">Select...</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+                <option value="Professional">Professional</option>
+              </select>
+            </div>
+            <div class="mission-card">
+              <label for="position" class="mission-title">Preferred Position</label>
+              <select id="position" name="position" style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                <option value="">Select...</option>
+                <option value="Point Guard">Point Guard</option>
+                <option value="Shooting Guard">Shooting Guard</option>
+                <option value="Small Forward">Small Forward</option>
+                <option value="Power Forward">Power Forward</option>
+                <option value="Center">Center</option>
+              </select>
+            </div>
+            <div class="mission-card">
+              <label for="availability" class="mission-title">Availability</label>
+              <select id="availability" name="availability" style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                <option value="">Select...</option>
+                <option value="Weekdays">Weekdays Only</option>
+                <option value="Weekends">Weekends Only</option>
+                <option value="Both">Both Weekdays & Weekends</option>
+              </select>
+            </div>
+            <div class="mission-card">
+              <label for="emergency-contact" class="mission-title">Emergency Contact Name</label>
+              <input id="emergency-contact" name="emergencyContact" type="text" style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+            </div>
+            <div class="mission-card">
+              <label for="emergency-phone" class="mission-title">Emergency Contact Phone</label>
+              <input id="emergency-phone" name="emergencyPhone" type="tel" style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+            </div>
+            <div class="mission-card" style="grid-column:1 / -1;">
+              <label for="medical-info" class="mission-title">Medical Information / Allergies</label>
+              <textarea id="medical-info" name="medicalInfo" rows="4" placeholder="Please mention any medical conditions, injuries, or allergies we should know about..." style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;"></textarea>
+            </div>
+          </div>
+          <div class="section-footer">
+            <button type="submit" class="btn-hero">Submit Registration</button>
+          </div>
+        </form>
       </div></section>
     </main>
 

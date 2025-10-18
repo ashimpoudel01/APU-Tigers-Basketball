@@ -662,8 +662,10 @@ function initializeFormSubmissions() {
     // Registration form handler
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
+        console.log('✅ Registration form found!');
         registerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            console.log('📝 Registration form submitted!');
             
             const submitBtn = registerForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
@@ -682,11 +684,14 @@ function initializeFormSubmissions() {
                 medicalInfo: document.getElementById('medical-info')?.value
             };
             
+            console.log('📋 Registration data:', formData);
+            
             // Disable button and show loading state
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
             
             try {
+                console.log('🌐 Sending registration to server...');
                 const response = await fetch('http://localhost:3000/api/register', {
                     method: 'POST',
                     headers: {
@@ -695,7 +700,9 @@ function initializeFormSubmissions() {
                     body: JSON.stringify(formData)
                 });
                 
+                console.log('📡 Server response status:', response.status);
                 const result = await response.json();
+                console.log('📬 Server result:', result);
                 
                 if (result.success) {
                     alert('✅ Registration submitted successfully! We\'ll contact you soon.');
@@ -704,13 +711,15 @@ function initializeFormSubmissions() {
                     alert('❌ ' + (result.message || 'Failed to submit registration. Please try again.'));
                 }
             } catch (error) {
-                console.error('Error:', error);
+                console.error('❌ Error:', error);
                 alert('❌ Failed to submit registration. Please make sure the server is running.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             }
         });
+    } else {
+        console.warn('⚠️ Registration form NOT found!');
     }
 }
 
