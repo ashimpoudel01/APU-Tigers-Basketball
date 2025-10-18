@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APU Tigers Basketball Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </head>
+  <body>
+    <!-- Navigation placeholder (loaded from nav.html) -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-slides">
+                            <div class="carousel-slide active">
+                                <div class="slide-bg" style="background-image: url('assets/hero-basketball-1.jpg')"></div>
+                                <div class="slide-overlay"></div>
+                                <div class="container-custom">
+                                    <div class="slide-content">
+                                        <h1 class="hero-title reveal hero-float">Welcome to <span class="text-secondary">APU Tigers</span></h1>
+                                        <p class="hero-subtitle reveal" style="--reveal-delay:120ms;">Building champions on and off the court since 2010</p>
+                                        <div class="hero-buttons" data-reveal-stagger>
+                                            <a href="register.html" class="btn-hero reveal" style="--reveal-delay:240ms;">Join Our Team</a>
+                                            <a href="#about" class="btn-hero-outline reveal" style="--reveal-delay:320ms;">Learn More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="slide-bg" style="background-image: url('assets/hero-basketball-2.jpg')"></div>
+                                <div class="slide-overlay"></div>
+                                <div class="container-custom">
+                                    <div class="slide-content">
+                                        <h1 class="hero-title">Excellence in <span class="text-secondary">Every Game</span></h1>
+                                        <p class="hero-subtitle">12 championship titles and counting</p>
+                                        <div class="hero-buttons">
+                                            <a href="#achievements" class="btn-hero">View Achievements</a>
+                                            <a href="#team" class="btn-hero-outline">Meet the Team</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="slide-bg" style="background-image: url('assets/hero-basketball-3.jpg')"></div>
+                                <div class="slide-overlay"></div>
+                                <div class="container-custom">
+                                    <div class="slide-content">
+                                        <h1 class="hero-title">Professional <span class="text-secondary">Training</span></h1>
+                                        <p class="hero-subtitle">State-of-the-art facilities and certified coaching</p>
+                                        <div class="hero-buttons">
+                                            <a href="#training" class="btn-hero">Start Training</a>
+                                            <a href="#contact" class="btn-hero-outline">Contact Us</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev" aria-label="Previous slide">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-btn next" aria-label="Next slide">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="carousel-indicators">
+                            <button class="indicator active" data-slide="0"></button>
+                            <button class="indicator" data-slide="1"></button>
+                            <button class="indicator" data-slide="2"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="container-custom">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="150">0</div>
+                            <div class="stat-label">Active Members</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="12">0</div>
+                            <div class="stat-label">Championships</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="15">0</div>
+                            <div class="stat-label">Years of Excellence</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="98">0</div>
+                            <div class="stat-label">Member Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Welcome Section -->
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="welcome-header">
+                        <h2 class="section-title">Welcome to <span class="text-secondary">APU Tigers</span></h2>
+                        <p class="section-subtitle">Building champions on and off the court since 2010. Join Asia Pacific University's premier basketball organization.</p>
+                    </div>
+
+                    <div class="welcome-content">
+                        <div class="welcome-image">
+                            <img src="assets/team-spirit.jpg" alt="Team huddle showing unity and teamwork" class="welcome-img">
+                        </div>
+                        <div class="welcome-text">
+                            <h3 class="welcome-title">Excellence, Teamwork, Dedication</h3>
+                            <p class="welcome-description">At APU Tigers Basketball Club, we don't just play basketball – we live it. Our mission is to foster athletic excellence, build character, and create lasting memories through competitive sports.</p>
+                            <ul class="welcome-features">
+                                <li class="feature-item">
+                                    <i class="fas fa-trophy feature-icon"></i>
+                                    <div class="feature-content">
+                                        <h4 class="feature-title">Championship Mentality</h4>
+                                        <p class="feature-description">12 titles and counting</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <i class="fas fa-users feature-icon"></i>
+                                    <div class="feature-content">
+                                        <h4 class="feature-title">Professional Coaching</h4>
+                                        <p class="feature-description">Learn from certified experts</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <i class="fas fa-chart-line feature-icon"></i>
+                                    <div class="feature-content">
+                                        <h4 class="feature-title">Continuous Growth</h4>
+                                        <p class="feature-description">Develop skills at every level</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a href="about.html" class="btn-hero">
+                                <span>Learn More About Us</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upcoming Events -->
+            <section class="section-padding bg-muted">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Upcoming <span class="text-secondary">Events</span></h2>
+                        <p class="section-subtitle">Don't miss out on our exciting schedule</p>
+                    </div>
+
+                    <div class="events-grid">
+                        <div class="event-card">
+                            <div class="event-date">
+                                <div class="event-day">15</div>
+                                <div class="event-month">MAR</div>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title">Inter-University Tournament</h3>
+                                <p class="event-time">
+                                    <i class="fas fa-calendar"></i> 2:00 PM
+                                </p>
+                                <p class="event-location">APU Sports Complex</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date">
+                                <div class="event-day">22</div>
+                                <div class="event-month">MAR</div>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title">Spring Training Camp</h3>
+                                <p class="event-time">
+                                    <i class="fas fa-calendar"></i> 9:00 AM
+                                </p>
+                                <p class="event-location">Main Campus Gym</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date">
+                                <div class="event-day">05</div>
+                                <div class="event-month">APR</div>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title">Charity Fun Run</h3>
+                                <p class="event-time">
+                                    <i class="fas fa-calendar"></i> 7:00 AM
+                                </p>
+                                <p class="event-location">Technology Park</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date">
+                                <div class="event-day">12</div>
+                                <div class="event-month">APR</div>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title">New Member Trials</h3>
+                                <p class="event-time">
+                                    <i class="fas fa-calendar"></i> 3:00 PM
+                                </p>
+                                <p class="event-location">APU Basketball Court</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-footer">
+                        <a href="#events" class="btn-hero-outline">View All Events</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Latest News -->
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Latest <span class="text-secondary">News</span></h2>
+                        <p class="section-subtitle">Stay updated with our achievements and announcements</p>
+                    </div>
+
+                    <div class="news-grid">
+                        <article class="news-card">
+                            <img src="assets/trophy.jpg" alt="Tigers Dominate Regional Championship" class="news-image">
+                            <div class="news-content">
+                                <span class="news-category">Championship</span>
+                                <h3 class="news-title">Tigers Dominate Regional Championship</h3>
+                                <p class="news-excerpt">APU Tigers secured a stunning 92-78 victory in the finals, claiming their 12th championship title.</p>
+                                <div class="news-footer">
+                                    <span class="news-date">Feb 28, 2025</span>
+                                    <a href="#news" class="news-link">Read More →</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="news-card">
+                            <img src="assets/facility.jpg" alt="New Training Facility Opening" class="news-image">
+                            <div class="news-content">
+                                <span class="news-category">Facility</span>
+                                <h3 class="news-title">New Training Facility Opening</h3>
+                                <p class="news-excerpt">State-of-the-art basketball facility to open next month with professional-grade equipment.</p>
+                                <div class="news-footer">
+                                    <span class="news-date">Feb 25, 2025</span>
+                                    <a href="#news" class="news-link">Read More →</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="news-card">
+                            <img src="assets/team-spirit.jpg" alt="Meet Our Team Captain" class="news-image">
+                            <div class="news-content">
+                                <span class="news-category">Team</span>
+                                <h3 class="news-title">Meet Our Team Captain</h3>
+                                <p class="news-excerpt">Exclusive interview with Marcus Chen about leadership, dedication, and winning mentality.</p>
+                                <div class="news-footer">
+                                    <span class="news-date">Feb 20, 2025</span>
+                                    <a href="#news" class="news-link">Read More →</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="section-footer">
+                        <a href="#news" class="btn-hero-outline">View All News</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="section-padding bg-gradient-hero">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title text-white">What Our <span class="text-secondary">Members Say</span></h2>
+                        <p class="section-subtitle text-white">Hear from our championship team</p>
+                    </div>
+
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <p class="testimonial-quote">"Joining Tigers was the best decision. The coaching, facilities, and team spirit are exceptional."</p>
+                            <div class="testimonial-author">
+                                <p class="author-name">Sarah Johnson</p>
+                                <p class="author-role">Team Captain 2023</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-quote">"This club shaped me into not just a better player, but a better leader and person."</p>
+                            <div class="testimonial-author">
+                                <p class="author-name">Marcus Chen</p>
+                                <p class="author-role">Current Captain</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-quote">"The training programs are world-class. I improved my skills faster than I ever imagined."</p>
+                            <div class="testimonial-author">
+                                <p class="author-name">Emma Wong</p>
+                                <p class="author-role">Member Since 2021</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="cta-section">
+                        <h2 class="cta-title">Ready to Join the Tigers?</h2>
+                        <p class="cta-subtitle">Be part of APU's most dynamic basketball community. Start your journey to excellence today.</p>
+                        <div class="cta-buttons">
+                            <a href="register.html" class="btn-cta-primary">Register Now</a>
+                            <a href="contact.html" class="btn-cta-secondary">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <section class="page-hero">
+                <div class="hero-bg">
+                    <img src="assets/facility.jpg" alt="APU Tigers basketball facility" class="hero-bg-img">
+                </div>
+                <div class="container-custom">
+                    <h1 class="page-title">About <span class="text-secondary">APU Tigers</span></h1>
+                    <p class="page-subtitle">Building champions and fostering excellence since 2010</p>
+                </div>
+            </section>
+
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2 class="section-title">Our <span class="text-secondary">Story</span></h2>
+                            <p class="about-description">Founded in 2010, APU Tigers Basketball Club was born from a simple vision: to create a premier basketball community that develops not just exceptional athletes, but outstanding individuals.</p>
+                            <p class="about-description">What started with just 15 passionate students has grown into Asia Pacific University's most successful sports organization, boasting over 150 active members and 12 championship titles.</p>
+                            <p class="about-description">Today, we're proud to offer world-class facilities, professional coaching, and a supportive community that pushes every member to reach their full potential.</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="assets/team-spirit.jpg" alt="Team showing unity and spirit" class="about-img">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mission & Vision -->
+            <section class="section-padding bg-muted">
+                <div class="container-custom">
+                    <div class="mission-vision-grid">
+                        <div class="mission-card">
+                            <div class="mission-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="mission-title">Our Mission</h3>
+                            <p class="mission-description">To foster athletic excellence, teamwork, and personal growth through competitive basketball, while promoting health, wellness, and school spirit within the Asia Pacific University community.</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="mission-title">Our Vision</h3>
+                            <p class="mission-description">To be the leading university basketball organization in Southeast Asia, recognized for developing champions who excel both on the court and in their future careers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Values -->
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Our Core <span class="text-secondary">Values</span></h2>
+                        <p class="section-subtitle">The principles that guide everything we do</p>
+                    </div>
+
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                                    <script>
+                                      // Load shared nav from nav.html then initialize the main script
+                                      (function loadNavAndScript(){
+                                        function insertNav(html){
+                                          var placeholder = document.getElementById('nav-placeholder');
+                                          if(placeholder){
+                                            placeholder.innerHTML = html;
+                                            // mark current page link active by matching URL
+                                            var links = placeholder.querySelectorAll('.nav-link, .mobile-nav-link');
+                                            var path = window.location.pathname.split('/').pop() || 'index.html';
+                                            links.forEach(function(a){
+                                              a.classList.remove('active');
+                                              var href = a.getAttribute('href');
+                                              if(href && href.split('/').pop() === path){
+                                                a.classList.add('active');
+                                              }
+                                            });
+                                          }
+                                        }
+
+                                        fetch('nav.html')
+                                          .then(function(res){ return res.ok ? res.text() : Promise.reject('nav not found'); })
+                                          .then(function(html){ insertNav(html); })
+                                          .catch(function(err){ console.warn('Could not load nav.html:', err); });
+                                      })();
+                                    </script>
+                                    <script src="script.js"></script>
+                            <p class="value-description">Striving for the highest standards in everything we do, on and off the court.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="value-title">Teamwork</h3>
+                            <p class="value-description">Building strong bonds and working together towards common goals.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="value-title">Integrity</h3>
+                            <p class="value-description">Maintaining honesty, respect, and fair play in all our activities.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="value-title">Growth</h3>
+                            <p class="value-description">Continuous improvement and development of skills and character.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Placeholder pages for other sections -->
+        <div id="team" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Our <span class="text-secondary">Team</span></h1>
+                    <p class="page-subtitle">Meet the champions who make it all possible</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Leadership & Players</h2>
+                        <p class="section-subtitle">Dedicated athletes and mentors driving our success</p>
+                    </div>
+
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon"><i class="fas fa-user-shield"></i></div>
+                            <h3 class="value-title">Marcus Chen</h3>
+                            <p class="value-description">Team Captain • Point Guard</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon"><i class="fas fa-user"></i></div>
+                            <h3 class="value-title">Sarah Johnson</h3>
+                            <p class="value-description">Shooting Guard</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon"><i class="fas fa-user"></i></div>
+                            <h3 class="value-title">Aditya Kumar</h3>
+                            <p class="value-description">Small Forward</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon"><i class="fas fa-user"></i></div>
+                            <h3 class="value-title">Emma Wong</h3>
+                            <p class="value-description">Power Forward</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon"><i class="fas fa-user"></i></div>
+                            <h3 class="value-title">Daniel Lee</h3>
+                            <p class="value-description">Center</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon"><i class="fas fa-user"></i></div>
+                            <h3 class="value-title">Aisha Rahman</h3>
+                            <p class="value-description">Guard</p>
+                        </div>
+                    </div>
+                    <div class="section-footer">
+                        <a href="#register" class="btn-hero">Join the Team</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="achievements" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Our <span class="text-secondary">Achievements</span></h1>
+                    <p class="page-subtitle">Celebrating 15 years of excellence</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Trophies & Milestones</h2>
+                        <p class="section-subtitle">Hard work, discipline, and teamwork rewarded</p>
+                    </div>
+                    <div class="values-grid">
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-trophy"></i></div>
+                            <h3 class="mission-title">2025</h3>
+                            <p class="mission-description">12th Championship Title • Regional University League</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-medal"></i></div>
+                            <h3 class="mission-title">2023</h3>
+                            <p class="mission-description">Reached 100+ active members across programs</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-trophy"></i></div>
+                            <h3 class="mission-title">2018</h3>
+                            <p class="mission-description">Regional Champions • Southeast Asia University League</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-trophy"></i></div>
+                            <h3 class="mission-title">2012</h3>
+                            <p class="mission-description">First Inter-University Tournament Title</p>
+                        </div>
+                    </div>
+                    <div class="section-footer">
+                        <a href="#gallery" class="btn-hero-outline">View Trophy Moments</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="events" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Upcoming <span class="text-secondary">Events</span></h1>
+                    <p class="page-subtitle">Don't miss out on our exciting schedule</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Season Schedule</h2>
+                        <p class="section-subtitle">Matches, trials, and community events</p>
+                    </div>
+                    <div class="events-grid">
+                        <div class="event-card">
+                            <div class="event-date"><div class="event-day">18</div><div class="event-month">APR</div></div>
+                            <div class="event-content">
+                                <h3 class="event-title">Inter-Faculty League Opener</h3>
+                                <p class="event-time"><i class="fas fa-calendar"></i> 6:00 PM</p>
+                                <p class="event-location">APU Arena Court A</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date"><div class="event-day">27</div><div class="event-month">APR</div></div>
+                            <div class="event-content">
+                                <h3 class="event-title">Skills Workshop: Shooting Mechanics</h3>
+                                <p class="event-time"><i class="fas fa-calendar"></i> 10:00 AM</p>
+                                <p class="event-location">Training Facility</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date"><div class="event-day">10</div><div class="event-month">MAY</div></div>
+                            <div class="event-content">
+                                <h3 class="event-title">Charity 3v3 Tournament</h3>
+                                <p class="event-time"><i class="fas fa-calendar"></i> 9:00 AM</p>
+                                <p class="event-location">Outdoor Court</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date"><div class="event-day">24</div><div class="event-month">MAY</div></div>
+                            <div class="event-content">
+                                <h3 class="event-title">New Member Trials</h3>
+                                <p class="event-time"><i class="fas fa-calendar"></i> 3:00 PM</p>
+                                <p class="event-location">Court B</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-footer">
+                        <a href="#register" class="btn-hero">Register for Events</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="schedule" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Training <span class="text-secondary">Schedule</span></h1>
+                    <p class="page-subtitle">Plan your training sessions</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Weekly Plan</h2>
+                        <p class="section-subtitle">Structured sessions for all levels</p>
+                    </div>
+                    <div class="mission-vision-grid">
+                        <div class="mission-card">
+                            <h3 class="mission-title">Beginners</h3>
+                            <p class="mission-description">Mon & Wed • 5:00 PM – 6:30 PM • Court B</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Intermediate</h3>
+                            <p class="mission-description">Tue & Thu • 6:00 PM – 7:30 PM • Court A</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Advanced</h3>
+                            <p class="mission-description">Fri • 6:00 PM – 8:00 PM • Court A</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Strength & Conditioning</h3>
+                            <p class="mission-description">Sat • 9:00 AM – 11:00 AM • Gym</p>
+                        </div>
+                    </div>
+                    <div class="section-footer">
+                        <a href="#training" class="btn-hero-outline">View Training Programs</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="training" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Training <span class="text-secondary">Programs</span></h1>
+                    <p class="page-subtitle">Develop your skills with professional coaching</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Programs</h2>
+                        <p class="section-subtitle">Designed by certified coaches for continuous growth</p>
+                    </div>
+                    <div class="mission-vision-grid">
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-basketball-ball"></i></div>
+                            <h3 class="mission-title">Fundamentals</h3>
+                            <p class="mission-description">Dribbling, passing, footwork, and core shooting mechanics.</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-bullseye"></i></div>
+                            <h3 class="mission-title">Shooting Lab</h3>
+                            <p class="mission-description">Form correction, shot selection, and off-the-dribble shooting.</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-running"></i></div>
+                            <h3 class="mission-title">Athletic Performance</h3>
+                            <p class="mission-description">Strength, agility, mobility, and injury prevention.</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon"><i class="fas fa-chess-knight"></i></div>
+                            <h3 class="mission-title">Game IQ</h3>
+                            <p class="mission-description">Reads, spacing, defensive schemes, and situational play.</p>
+                        </div>
+                    </div>
+                    <div class="section-footer">
+                        <a href="#contact" class="btn-hero">Talk to a Coach</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="news" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Latest <span class="text-secondary">News</span></h1>
+                    <p class="page-subtitle">Stay updated with our achievements</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="news-grid">
+                        <article class="news-card">
+                            <img src="assets/trophy.jpg" alt="Championship Recap" class="news-image">
+                            <div class="news-content">
+                                <span class="news-category">Championship</span>
+                                <h3 class="news-title">Season Recap: Road to the 12th Title</h3>
+                                <p class="news-excerpt">A breakdown of key games, standout performances, and tactical shifts that led to victory.</p>
+                                <div class="news-footer"><span class="news-date">Mar 05, 2025</span><a href="#news" class="news-link">Read More →</a></div>
+                            </div>
+                        </article>
+                        <article class="news-card">
+                            <img src="assets/facility.jpg" alt="Facility Upgrades" class="news-image">
+                            <div class="news-content">
+                                <span class="news-category">Facility</span>
+                                <h3 class="news-title">Facility Upgrades Announced</h3>
+                                <p class="news-excerpt">New courts, recovery rooms, and analytics tools coming this summer.</p>
+                                <div class="news-footer"><span class="news-date">Mar 01, 2025</span><a href="#news" class="news-link">Read More →</a></div>
+                            </div>
+                        </article>
+                        <article class="news-card">
+                            <img src="assets/team-spirit.jpg" alt="Captain Interview" class="news-image">
+                            <div class="news-content">
+                                <span class="news-category">Interview</span>
+                                <h3 class="news-title">Captain's Corner: Leadership Lessons</h3>
+                                <p class="news-excerpt">Insights on balancing academics, sport, and team culture.</p>
+                                <div class="news-footer"><span class="news-date">Feb 22, 2025</span><a href="#news" class="news-link">Read More →</a></div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="gallery" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Photo <span class="text-secondary">Gallery</span></h1>
+                    <p class="page-subtitle">Capturing our greatest moments</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="values-grid">
+                        <div class="mission-card"><img src="assets/hero-basketball-1.jpg" alt="Game action" class="news-image"></div>
+                        <div class="mission-card"><img src="assets/hero-basketball-2.jpg" alt="Training session" class="news-image"></div>
+                        <div class="mission-card"><img src="assets/hero-basketball-3.jpg" alt="Team huddle" class="news-image"></div>
+                        <div class="mission-card"><img src="assets/trophy.jpg" alt="Trophy" class="news-image"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="resources" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Resources</h1>
+                    <p class="page-subtitle">Everything you need to succeed</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="mission-vision-grid">
+                        <div class="mission-card">
+                            <h3 class="mission-title">Handbook</h3>
+                            <p class="mission-description">Club policies, code of conduct, and participation guidelines.</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Nutrition Guide</h3>
+                            <p class="mission-description">Meal plans and recovery tips for student athletes.</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Training Logs</h3>
+                            <p class="mission-description">Track your progress and set weekly goals.</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Video Library</h3>
+                            <p class="mission-description">Play breakdowns and drill demos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="contact" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Contact <span class="text-secondary">Us</span></h1>
+                    <p class="page-subtitle">Get in touch with our team</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Send a Message</h2>
+                        <p class="section-subtitle">We usually reply within 24 hours</p>
+                    </div>
+                    <form id="contact-form">
+                        <div class="mission-vision-grid">
+                            <div class="mission-card">
+                                <label for="name" class="mission-title">Name</label>
+                                <input id="name" name="name" type="text" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                            </div>
+                            <div class="mission-card">
+                                <label for="email" class="mission-title">Email</label>
+                                <input id="email" name="email" type="email" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                            </div>
+                            <div class="mission-card" style="grid-column:1 / -1;">
+                                <label for="message" class="mission-title">Message</label>
+                                <textarea id="message" name="message" rows="5" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;"></textarea>
+                            </div>
+                        </div>
+                        <div class="section-footer">
+                            <button type="submit" class="btn-hero">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div id="faq" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Frequently Asked <span class="text-secondary">Questions</span></h1>
+                    <p class="page-subtitle">Find answers to common questions</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="mission-vision-grid">
+                        <div class="mission-card">
+                            <h3 class="mission-title">How do I join?</h3>
+                            <p class="mission-description">Use the Register page to sign up, then attend trials on the posted dates.</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Do I need experience?</h3>
+                            <p class="mission-description">We welcome all levels. Programs are tailored from beginner to advanced.</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">What are the fees?</h3>
+                            <p class="mission-description">Minimal semester fees to cover facilities and equipment. Scholarships available.</p>
+                        </div>
+                        <div class="mission-card">
+                            <h3 class="mission-title">Where are practices held?</h3>
+                            <p class="mission-description">APU Sports Complex, Courts A and B, per the posted schedule.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="register" class="page">
+            <div class="page-hero">
+                <div class="container-custom">
+                    <h1 class="page-title">Join the <span class="text-secondary">Tigers</span></h1>
+                    <p class="page-subtitle">Start your basketball journey today</p>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container-custom">
+                    <div class="section-header">
+                        <h2 class="section-title">Registration Form</h2>
+                        <p class="section-subtitle">Tell us a bit about yourself</p>
+                    </div>
+                    <form id="register-form">
+                        <div class="mission-vision-grid">
+                            <div class="mission-card">
+                                <label for="fullName" class="mission-title">Full Name</label>
+                                <input id="fullName" name="fullName" type="text" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                            </div>
+                            <div class="mission-card">
+                                <label for="emailReg" class="mission-title">Email</label>
+                                <input id="emailReg" name="emailReg" type="email" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                            </div>
+                            <div class="mission-card">
+                                <label for="position" class="mission-title">Preferred Position</label>
+                                <select id="position" name="position" required style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;">
+                                    <option value="">Select...</option>
+                                    <option>Point Guard</option>
+                                    <option>Shooting Guard</option>
+                                    <option>Small Forward</option>
+                                    <option>Power Forward</option>
+                                    <option>Center</option>
+                                </select>
+                            </div>
+                            <div class="mission-card" style="grid-column:1 / -1;">
+                                <label for="notes" class="mission-title">Notes</label>
+                                <textarea id="notes" name="notes" rows="4" style="width:100%;padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);margin-top:0.5rem;"></textarea>
+                            </div>
+                        </div>
+                        <div class="section-footer">
+                            <button type="submit" class="btn-hero">Submit Registration</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container-custom">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <img src="assets/logo.jpeg" alt="APU Tigers Logo" class="logo-img">
+                        </div>
+                        <div class="footer-logo-text">
+                            <h3 class="footer-title">APU Tigers</h3>
+                            <p class="footer-subtitle">Basketball Club</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">Building champions on and off the court since 2010. Join Asia Pacific University's premier basketball organization.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html" class="footer-link">About Us</a></li>
+                        <li><a href="team.html" class="footer-link">Team</a></li>
+                        <li><a href="events.html" class="footer-link">Events</a></li>
+                        <li><a href="training.html" class="footer-link">Training</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="schedule.html" class="footer-link">Schedule</a></li>
+                        <li><a href="news.html" class="footer-link">News</a></li>
+                        <li><a href="gallery.html" class="footer-link">Gallery</a></li>
+                        <li><a href="resources.html" class="footer-link">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <div class="contact-info">
+                        <p class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Asia Pacific University, Technology Park Malaysia
+                        </p>
+                        <p class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            +60 3-8996 1000
+                        </p>
+                        <p class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            tigers@apu.edu.my
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 APU Tigers Basketball Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
