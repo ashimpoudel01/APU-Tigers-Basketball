@@ -28,12 +28,39 @@ function loadNavigation() {
                 navPlaceholder.innerHTML = data;
                 // Initialize navigation after it's loaded
                 initializeNavigation();
+                // Highlight active page
+                highlightActivePage();
             })
             .catch(error => console.error('Error loading navigation:', error));
     } else {
         // If no placeholder, initialize navigation directly (it's already in the page)
         initializeNavigation();
+        highlightActivePage();
     }
+}
+
+// Highlight the active page in navigation
+function highlightActivePage() {
+    // Get current page filename
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Get all navigation links
+    const allNavLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    
+    allNavLinks.forEach(link => {
+        // Remove any existing active class
+        link.classList.remove('active');
+        
+        // Get the href filename
+        const linkPage = link.getAttribute('href');
+        
+        // Check if this link matches the current page
+        if (linkPage === currentPage || 
+            (currentPage === '' && linkPage === 'index.html') ||
+            (currentPage === '/' && linkPage === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
 }
 
 // Initialize the application
