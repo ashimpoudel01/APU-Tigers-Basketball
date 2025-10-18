@@ -584,16 +584,18 @@ function improveAccessibility() {
     });
     
     // Add focus management for mobile menu
-    const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    
-    mobileMenuBtn.addEventListener('click', function() {
-        if (mobileMenu.classList.contains('open')) {
-            const firstFocusable = mobileMenu.querySelector(focusableElements);
-            if (firstFocusable) {
-                firstFocusable.focus();
+    if (mobileMenuBtn && mobileMenu) {
+        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            if (mobileMenu.classList.contains('open')) {
+                const firstFocusable = mobileMenu.querySelector(focusableElements);
+                if (firstFocusable) {
+                    firstFocusable.focus();
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 // Form submission handlers
