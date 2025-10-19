@@ -237,7 +237,7 @@ function initializeCarousel() {
         let touchEndX = 0;
         let touchEndY = 0;
         let isSwiping = false;
-        const swipeThreshold = 40; // minimum px to treat as a swipe
+        const swipeThreshold = 5; // minimum px to treat as a swipe
 
         const onTouchStart = function(e) {
             if (!e.touches || e.touches.length === 0) return;

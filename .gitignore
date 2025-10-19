@@ -5,6 +5,11 @@ package-lock.json
 # Environment variables
 .env
 
+# Database files (sensitive user data)
+*.sqlite
+*.db
+sessions/
+
 # OS files
 .DS_Store
 Thumbs.db

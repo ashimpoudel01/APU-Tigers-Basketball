@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Verify Email • APU Tigers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="touch-gestures.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      .verification-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+      .verification-card {
+        background: hsl(var(--card));
+        padding: 3rem 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-xl);
+      }
+      .verification-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+      }
+      .verification-icon.loading { color: hsl(var(--secondary)); }
+      .verification-icon.success { color: hsl(var(--success)); }
+      .verification-icon.error { color: hsl(var(--destructive)); }
+      .verification-message {
+        margin: 1.5rem 0;
+        font-size: 1.125rem;
+      }
+      .btn-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+    </style>
+      <script src="loader.js"></script>
+    <script src="touch-gestures.js"></script>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <script>
+      (function() {
+        var p = document.getElementById('nav-placeholder');
+        if (!p) return;
+        fetch('nav.html')
+          .then(function(res) { return res.text(); })
+          .then(function(html) {
+            p.innerHTML = html;
+            var links = p.querySelectorAll('.nav-link, .mobile-nav-link');
+            var path = window.location.pathname.split('/').pop() || 'index.html';
+            links.forEach(function(link) {
+              if (link.getAttribute('href').split('/').pop() === path) {
+                link.classList.add('active');
+              }
+            });
+          })
+          .catch(function() { /* fail silently */ });
+      })();
+    </script>
+
+    <main class="main-content">
+      <div class="page-hero">
+        <div class="container-custom">
+          <h1 class="page-title">Email <span class="text-secondary">Verification</span></h1>
+          <p class="page-subtitle">Verifying your account</p>
+        </div>
+      </div>
+
+      <section class="section-padding">
+        <div class="verification-container">
+          <div class="verification-card">
+            <div id="verification-status">
+              <div class="verification-icon loading">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
+              <h2>Verifying your email...</h2>
+              <p class="verification-message">Please wait while we verify your account.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container-custom">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-logo">
+              <div class="logo-icon">
+                <img src="assets/logo.jpeg" alt="APU Tigers Logo" class="logo-img">
+              </div>
+              <div class="footer-logo-text">
+                <h3 class="footer-title">APU Tigers</h3>
+                <p class="footer-subtitle">Basketball Club</p>
+              </div>
+            </div>
+            <p class="footer-description">Building champions on and off the court since 2010.</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 APU Tigers Basketball Club. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="theme-toggle.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // Get token from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+
+      async function verifyEmail() {
+        const statusDiv = document.getElementById('verification-status');
+
+        if (!token) {
+          statusDiv.innerHTML = `
+            <div class="verification-icon error">
+              <i class="fas fa-times-circle"></i>
+            </div>
+            <h2>Invalid Link</h2>
+            <p class="verification-message">No verification token found. Please check your email for the correct link.</p>
+            <div class="btn-group">
+              <a href="login.html" class="btn-hero">Go to Login</a>
+            </div>
+          `;
+          return;
+        }
+
+        try {
+          const res = await fetch(`/api/verify-email/${token}`);
+          const data = await res.json();
+
+          if (data.success) {
+            statusDiv.innerHTML = `
+              <div class="verification-icon success">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <h2>Email Verified!</h2>
+              <p class="verification-message">Your email has been successfully verified. You can now access all features of your account.</p>
+              <div class="btn-group">
+                <a href="dashboard.html" class="btn-hero">Go to Dashboard</a>
+                <a href="index.html" class="btn-hero-outline" style="color: hsl(var(--secondary)); border-color: hsl(var(--secondary));">Back to Home</a>
+              </div>
+            `;
+          } else {
+            statusDiv.innerHTML = `
+              <div class="verification-icon error">
+                <i class="fas fa-exclamation-circle"></i>
+              </div>
+              <h2>Verification Failed</h2>
+              <p class="verification-message">${data.message || 'Invalid or expired verification token.'}</p>
+              <div class="btn-group">
+                <a href="signup.html" class="btn-hero">Sign Up Again</a>
+                <a href="login.html" class="btn-hero-outline" style="color: hsl(var(--secondary)); border-color: hsl(var(--secondary));">Go to Login</a>
+              </div>
+            `;
+          }
+        } catch (error) {
+          statusDiv.innerHTML = `
+            <div class="verification-icon error">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2>Connection Error</h2>
+            <p class="verification-message">Failed to verify your email. Please check your internet connection and try again.</p>
+            <div class="btn-group">
+              <button onclick="verifyEmail()" class="btn-hero">Retry</button>
+            </div>
+          `;
+        }
+      }
+
+      // Verify email on page load
+      verifyEmail();
+    </script>
+    <script src="nav-auth.js"></script>
+  </body>
+</html>

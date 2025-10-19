@@ -70,11 +70,40 @@ The **APU Tigers Basketball Club Website** is a comprehensive web platform desig
 - ✅ **Environment Variables** - Secure credential management
 - ✅ **Error Handling** - Comprehensive error messages and logging
 
+### 🔐 Authentication & User Management
+- ✅ **User Registration** - Sign up with email, password, and full name
+- ✅ **Email Verification** - Verify email address via secure token link (24-hour expiry)
+- ✅ **User Login** - Session-based authentication with secure cookies
+- ✅ **Password Reset** - Forgot password flow with email-based reset (1-hour expiry)
+- ✅ **User Dashboard** - Personalized dashboard for logged-in members
+- ✅ **Session Management** - 7-day persistent sessions with HTTP-only cookies
+- ✅ **Profile Dropdown** - Dynamic navigation with user initials and name
+- ✅ **Dual Database Support** - SQLite (development) + PostgreSQL (production)
+
+### 🛡️ Admin Panel Features
+- ✅ **Role-Based Access Control** - Admin, Moderator, and User roles
+- ✅ **User Management Dashboard** - View, edit, delete, and verify users
+- ✅ **Search & Filter** - Instant search across all user fields
+- ✅ **User Analytics** - Total users, verified users, active today, new this month
+- ✅ **Bulk Operations** - Manage multiple users efficiently
+- ✅ **Role Assignment** - Promote users to admin or moderator
+- ✅ **Email Verification** - Manually verify user emails
+- ✅ **User Editing** - Update name, email, role, and verification status
+- ✅ **Admin API Routes** - RESTful endpoints for all admin operations
+- ✅ **Responsive Admin UI** - Works on desktop, tablet, and mobile
+- ✅ **Color-Coded Badges** - Visual role and status indicators
+- ✅ **Real-Time Stats** - Live analytics dashboard
+
 ### 🔒 Security Features
+- ✅ **Bcrypt Password Hashing** - Passwords never stored in plain text (10 salt rounds)
+- ✅ **Parameterized SQL Queries** - Protection against SQL injection attacks
+- ✅ **Email Verification** - Ensures valid email addresses for all accounts
+- ✅ **Token-Based Reset** - Secure password reset with single-use tokens
+- ✅ **Session Security** - HTTP-only cookies, secure session management
 - ✅ **Environment Variables** - Sensitive data protected with `.env`
-- ✅ **Gitignore Configuration** - Password and credentials never committed
+- ✅ **Gitignore Configuration** - Credentials and database files never committed
 - ✅ **Gmail App Passwords** - Secure authentication without exposing main password
-- ✅ **Input Sanitization** - Protected against common vulnerabilities
+- ✅ **Input Validation** - Client and server-side validation and sanitization
 
 ---
 
@@ -88,9 +117,13 @@ The **APU Tigers Basketball Club Website** is a comprehensive web platform desig
 - ![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=flat-square&logo=fontawesome&logoColor=white) **Font Awesome 6** - Icon library
 
 ### Back-End Technologies
-- ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) **Node.js** - JavaScript runtime
-- ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) **Express.js** - Web application framework
+- ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) **Node.js v18+** - JavaScript runtime
+- ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) **Express.js v4.18** - Web application framework
+- ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white) **SQLite3** - Development database
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white) **PostgreSQL** - Production database
 - ![Nodemailer](https://img.shields.io/badge/Nodemailer-0F9DCE?style=flat-square&logo=mail.ru&logoColor=white) **Nodemailer** - Email sending functionality
+- **bcrypt** - Password hashing (10 salt rounds)
+- **express-session** - Session management
 - **dotenv** - Environment variable management
 - **body-parser** - Request body parsing
 - **cors** - Cross-origin resource sharing
@@ -173,15 +206,30 @@ Before you begin, ensure you have the following installed:
 Open `.env` and add your credentials:
 
 ```env
+# Email Configuration
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=xxxx xxxx xxxx xxxx
+
+# Base URL (for email links)
+BASE_URL=http://localhost:3000
+
+# Session Secret (generate a random string)
+SESSION_SECRET=your_random_secret_key_min_32_chars
+
+# Server Port
 PORT=3000
+NODE_ENV=development
+
+# Database (SQLite auto-configured for development)
+# For production PostgreSQL, add:
+# DATABASE_URL=postgresql://user:pass@host:5432/dbname
 ```
 
 ⚠️ **Important:**
 - Use your Gmail address for `EMAIL_USER`
 - Use the App Password (NOT your regular password) for `EMAIL_PASS`
 - Keep the spaces in the App Password
+- Generate a secure `SESSION_SECRET` (use: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
 - Never commit `.env` to Git (already in `.gitignore`)
 
 ---
@@ -190,13 +238,177 @@ PORT=3000
 
 ### Running the Application
 
-#### Start the Email Server
+#### Start the Server
 
 ```bash
 npm start
 ```
 
 The server will run on `http://localhost:3000`
+
+### 🔐 Authentication Features
+
+#### User Registration & Login
+1. Navigate to the **Join Now** button in the navigation
+2. Fill out the signup form with:
+   - Email address
+   - Password (minimum 6 characters)
+   - Full name
+3. Check your email for verification link
+4. Click the verification link (valid for 24 hours)
+5. Login with your credentials at `/login.html`
+6. Access your personalized dashboard at `/dashboard.html`
+
+#### Password Reset Flow
+1. Click **Forgot Password?** on the login page
+2. Enter your email address
+3. Check your email for reset link (valid for 1 hour)
+4. Click the link and enter new password
+5. Login with your new password
+
+### 🛡️ Admin Panel Setup & Usage
+
+#### Creating Your First Admin User
+
+After setting up the application:
+
+**Option 1: Using the CLI Tool** (Recommended)
+```bash
+# Promote an existing user to admin
+node make-admin.js your-email@example.com
+```
+
+**Option 2: Manual Database Update**
+```bash
+# For SQLite
+sqlite3 users.sqlite
+UPDATE users SET role = 'admin', is_admin = 1, email_verified = 1 WHERE email = 'your@email.com';
+.exit
+
+# For PostgreSQL
+psql -d apu_tigers
+UPDATE users SET role = 'admin', is_admin = TRUE, email_verified = TRUE WHERE email = 'your@email.com';
+\q
+```
+
+**Option 3: Verify Setup**
+```bash
+# Check admin status
+node test-admin-setup.js
+```
+
+#### Accessing the Admin Panel
+
+1. **Login** to your account at `/login.html`
+2. After login, your profile dropdown will show **🛡️ Admin Panel** link
+3. Click it to access: `/admin.html`
+
+**Important:** You MUST logout and login again after being promoted to admin for the session to refresh with admin privileges.
+
+#### Admin Panel Features
+
+**📊 User Management Tab:**
+- View all registered users in a sortable table
+- **Search:** Instant search by name or email
+- **Edit User:** Update name, email, role, verification status
+- **Delete User:** Remove accounts with confirmation
+- **Verify Email:** Manually verify user emails
+- **Assign Roles:** Promote to admin or moderator
+
+**📈 Analytics Tab:**
+- **Total Users:** Count of all registered users
+- **Verified Users:** Users with verified emails
+- **Active Today:** Users who logged in today
+- **New This Month:** Recent registrations
+
+**📰 Content Management Tab:** (Coming Soon)
+- Photo gallery upload
+- News article editor
+- Event calendar management
+- Achievement tracking
+
+**⚙️ Settings Tab:** (Coming Soon)
+- Site configuration
+- Email template editor
+- Registration controls
+- Maintenance mode
+
+#### Admin API Endpoints
+
+All admin endpoints require authentication and admin role:
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/admin/users` | List all users |
+| GET | `/api/admin/users/:id` | Get single user details |
+| PUT | `/api/admin/users/:id` | Update user info |
+| DELETE | `/api/admin/users/:id` | Delete user account |
+| POST | `/api/admin/users/:id/verify` | Verify user email |
+| GET | `/api/admin/analytics` | Get dashboard statistics |
+
+**Example API Usage:**
+```javascript
+// Get all users (requires admin session)
+fetch('/api/admin/users')
+  .then(res => res.json())
+  .then(users => console.log(users));
+
+// Update user role
+fetch('/api/admin/users/123', {
+  method: 'PUT',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    role: 'moderator',
+    email_verified: 1
+  })
+});
+```
+
+#### Troubleshooting Admin Access
+
+**Problem: "Access denied. Admin privileges required."**
+
+**Solution:**
+1. Verify you're promoted in database: `node test-admin-setup.js`
+2. **Logout** completely from the website
+3. **Clear browser cookies** (or use incognito/private window)
+4. **Login again** with your admin account
+5. Now access `/admin.html`
+
+**Why:** Your browser session was created before you became admin. Logging in again creates a fresh session with admin privileges.
+
+**Debug Tools:**
+```bash
+# Check database status
+node test-admin-setup.js
+
+# Fix admin access issues
+node fix-admin-access.js
+
+# View session data
+# Open http://localhost:3000/debug-session.html in browser
+```
+
+### 📊 Database Management
+
+#### SQLite (Development - Default)
+- Automatically creates `users.sqlite` and `sessions.sqlite`
+- No configuration needed
+- View data with: [DB Browser for SQLite](https://sqlitebrowser.org/)
+
+#### PostgreSQL (Production)
+```bash
+# Install PostgreSQL client
+npm install pg connect-pg-simple
+
+# Set DATABASE_URL in .env
+DATABASE_URL=postgresql://username:password@localhost:5432/apu_tigers
+
+# Run schema setup
+psql -U username -d apu_tigers -f schema.sql
+```
+
+See [DATABASE_SETUP.md](DATABASE_SETUP.md) for detailed PostgreSQL setup instructions.
 
 #### Start the Web Server
 
@@ -249,7 +461,116 @@ node test-email.js
 
 ---
 
-## 📁 Project Structure
+## 🔐 User Authentication System
+
+The APU Tigers website now includes a complete **user authentication system** with SQL database support, session-based authentication, password hashing, and a fully styled user interface that matches the website's design.
+
+### 🎨 Features
+
+- ✅ **SQL Database Support** - PostgreSQL (production) or SQLite (development)
+- ✅ **Secure Authentication** - bcrypt password hashing with 10 salt rounds
+- ✅ **Parameterized Queries** - SQL injection protection
+- ✅ **Session Management** - Express sessions with persistent storage
+- ✅ **Responsive Design** - Mobile-first UI matching the website's brand
+- ✅ **User Dashboard** - Personalized member dashboard
+- ✅ **Production Ready** - Environment-based configuration
+
+### 📄 Authentication Pages
+
+- **Sign Up** (`signup.html`) - Create a new account with email, password, and full name
+- **Log In** (`login.html`) - Authenticate existing users
+- **Dashboard** (`dashboard.html`) - Protected member area with user info and quick links
+
+### 🔌 API Endpoints
+
+| Method | Endpoint | Body | Description |
+|--------|----------|------|-------------|
+| POST | `/api/signup` | `{ email, password, fullName }` | Create new user account |
+| POST | `/api/login` | `{ email, password }` | Authenticate and create session |
+| POST | `/api/logout` | - | Destroy current session |
+| GET | `/api/me` | - | Get current authenticated user |
+
+### 🚀 Usage
+
+1. **Start the server** (if not already running):
+   ```bash
+   npm start
+   ```
+
+2. **Access the authentication pages**:
+   - Sign Up: `http://localhost:3000/signup.html`
+   - Log In: `http://localhost:3000/login.html`
+   - Dashboard: `http://localhost:3000/dashboard.html`
+
+3. **Create a test account**:
+   - Navigate to the Sign Up page
+   - Enter your details (email, password, full name)
+   - Click "Create Account"
+   - You'll be redirected to your dashboard
+
+### 🗄️ Database Schema
+
+**Users Table**:
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,                -- PostgreSQL: SERIAL, SQLite: INTEGER AUTOINCREMENT
+  email VARCHAR(255) UNIQUE NOT NULL,   -- User email (unique)
+  password_hash VARCHAR(255) NOT NULL,  -- Bcrypt hashed password
+  full_name VARCHAR(255),               -- User's full name (optional)
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_users_email ON users(email);
+```
+
+**Database Options:**
+- **SQLite** (Development) - Stored in `users.sqlite` (auto-created)
+- **PostgreSQL** (Production) - Connection via `DATABASE_URL` environment variable
+- **Role Column** - Added `role` field for admin/moderator/user distinction
+
+See [`DATABASE_SETUP.md`](DATABASE_SETUP.md) for complete SQL setup instructions.
+
+### 🔒 Security Features
+
+- ✅ **Password Hashing** - Bcrypt with 10 salt rounds (passwords never stored in plain text)
+- ✅ **SQL Injection Protection** - All queries use parameterized statements
+- ✅ **Session Security** - HTTP-only cookies, 7-day expiration with rolling refresh
+- ✅ **Input Validation** - Email format and password strength checks
+- ✅ **Error Handling** - No sensitive data exposed in error messages
+- ✅ **Role-Based Access** - Middleware protection for admin routes
+- ✅ **CORS Protection** - Controlled cross-origin requests
+
+**Production Configuration** (`.env`):
+```env
+# Required
+SESSION_SECRET=your-long-random-secret-here
+DATABASE_URL=postgresql://user:pass@host:5432/dbname
+
+# Recommended
+NODE_ENV=production
+```
+
+**Additional Security Recommendations:**
+- Enable HTTPS and set `cookie.secure = true`
+- Add rate limiting on authentication endpoints
+- Implement CSRF protection for forms
+- Use strong `SESSION_SECRET` (generate with `openssl rand -base64 32`)
+- Regular security audits with `npm audit`
+
+### 🎯 Integration with Navigation
+
+The authentication pages include:
+- **Full navigation bar** (loaded from `nav.html`)
+- **Consistent styling** (uses `styles.css` design tokens)
+- **Responsive footer** matching other pages
+- **Brand colors** (Deep Blue primary, Orange secondary)
+- **Typography** (Poppins + Open Sans fonts)
+
+
+---
+
+## �📁 Project Structure
 
 ```
 APU-Tigers-Basketball/
@@ -440,16 +761,67 @@ SOFTWARE.
 - [x] Contact form functionality
 - [x] Registration system
 - [x] Active navigation highlighting
-- [ ] User authentication system
-- [ ] Admin dashboard
+- [x] User authentication system ✅
+- [x] Email verification system ✅
+- [x] Password reset functionality ✅
+- [x] User dashboard ✅
+- [x] Admin control panel ✅
+- [x] Role-based access control ✅
+- [x] User management (CRUD) ✅
+- [x] Database migration system ✅
 - [ ] Event management system
 - [ ] Online payment integration
-- [ ] Member portal
+- [ ] Member portal enhancements
 - [ ] Live score updates
 - [ ] Photo upload feature
 - [ ] Newsletter subscription
 - [ ] Social media integration
 - [ ] PWA (Progressive Web App) support
+- [ ] Content management system (CMS)
+- [ ] Analytics dashboard enhancements
+
+---
+
+## 📊 Admin Panel Quick Reference
+
+### 🚀 Setup Commands
+
+```bash
+# Create first admin user
+node make-admin.js your@email.com
+
+# Verify admin setup
+node test-admin-setup.js
+
+# Troubleshoot access issues
+node fix-admin-access.js
+```
+
+### 🔗 Admin URLs
+
+- **Admin Panel:** `http://localhost:3000/admin.html`
+- **Debug Session:** `http://localhost:3000/debug-session.html`
+- **Login:** `http://localhost:3000/login.html`
+
+### 🎯 Admin Features Checklist
+
+- ✅ User management table (view, search, sort)
+- ✅ Edit user details (name, email, role)
+- ✅ Delete users with confirmation
+- ✅ Manual email verification
+- ✅ Role assignment (user/admin/moderator)
+- ✅ Real-time analytics (4 stat cards)
+- ✅ Responsive design (desktop/tablet/mobile)
+- ✅ Secure API routes with middleware
+- ✅ Color-coded status badges
+- ✅ Session-based authentication
+
+### 📚 Related Documentation
+
+- **Full Admin Guide:** [ADMIN_SETUP_COMPLETE.md](ADMIN_SETUP_COMPLETE.md)
+- **Admin Panel Manual:** [ADMIN_PANEL_GUIDE.md](ADMIN_PANEL_GUIDE.md)
+- **Authentication Docs:** [AUTHENTICATION_GUIDE.md](AUTHENTICATION_GUIDE.md)
+- **Database Setup:** [DATABASE_SETUP.md](DATABASE_SETUP.md)
 
 ---
 

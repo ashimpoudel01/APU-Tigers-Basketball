@@ -26,7 +26,23 @@
         <a href="resources.html" class="nav-link">Resources</a>
         <a href="contact.html" class="nav-link">Contact</a>
         <a href="faq.html" class="nav-link">FAQ</a>
-        <a href="register.html" class="btn-hero">Join Now</a>
+      </div>
+      
+      <!-- Theme Toggle -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </button>
+
+      <!-- Auth Section - Positioned at the right corner -->
+      <div id="nav-auth-desktop" class="nav-auth-section">
+        <a href="login.html" class="nav-link auth-login-btn">
+          <i class="fas fa-sign-in-alt"></i>
+          <span class="auth-btn-text">Login</span>
+        </a>
+        <a href="register.html" class="btn-hero btn-nav-join">
+          <span class="join-text-short">Join</span>
+          <span class="join-text-full">Join Now</span>
+        </a>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -50,8 +66,114 @@
         <a href="resources.html" class="mobile-nav-link">Resources</a>
         <a href="contact.html" class="mobile-nav-link">Contact</a>
         <a href="faq.html" class="mobile-nav-link">FAQ</a>
-        <a href="register.html" class="btn-hero mobile-btn">Join Now</a>
+        
+        <!-- Auth Section (dynamically updated) -->
+        <div id="nav-auth-mobile" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid hsl(var(--border));">
+          <a href="login.html" class="mobile-nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="register.html" class="btn-hero mobile-btn">Join Now</a>
+        </div>
       </div>
     </div>
   </div>
 </nav>
+
+<script>
+  // Update navigation based on user authentication status
+  (function() {
+    console.log('🔍 Checking authentication status...');
+    fetch('/api/me')
+      .then(function(res) {
+        console.log('📡 Response status:', res.status);
+        if (res.ok) return res.json();
+        throw new Error('Not logged in');
+      })
+      .then(function(data) {
+        console.log('✅ User data received:', data);
+        
+        // User is logged in - update nav with profile
+        var desktopAuth = document.getElementById('nav-auth-desktop');
+        var mobileAuth = document.getElementById('nav-auth-mobile');
+        
+        if (!data.user || !data.user.fullName) {
+          console.error('❌ Invalid user data:', data);
+          return;
+        }
+        
+        // Get user initials for avatar
+        var fullName = data.user.fullName || 'User';
+        var nameParts = fullName.split(' ');
+        var initials = nameParts.map(function(n) { return n[0]; }).join('').toUpperCase().substring(0, 2);
+        var firstName = nameParts[0];
+        
+        console.log('👤 Creating profile for:', firstName, '(' + initials + ')');
+        
+        if (desktopAuth) {
+          desktopAuth.innerHTML = 
+            '<div class="nav-profile-dropdown">' +
+              '<button class="nav-profile-btn" onclick="toggleProfileDropdown(event)">' +
+                '<span class="profile-avatar">' + initials + '</span>' +
+                '<span class="profile-name">' + firstName + '</span>' +
+                '<i class="fas fa-chevron-down"></i>' +
+              '</button>' +
+              '<div class="profile-dropdown-menu" id="profile-dropdown">' +
+                '<a href="dashboard.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>' +
+                '<a href="register.html" class="dropdown-item"><i class="fas fa-user-edit"></i> My Profile</a>' +
+                '<div class="dropdown-divider"></div>' +
+                '<a href="#" onclick="handleLogout(event)" class="dropdown-item logout"><i class="fas fa-sign-out-alt"></i> Logout</a>' +
+              '</div>' +
+            '</div>';
+          console.log('✅ Desktop navigation updated');
+        }
+        
+        if (mobileAuth) {
+          mobileAuth.innerHTML = 
+            '<div class="mobile-profile-section">' +
+              '<div class="mobile-profile-info">' +
+                '<span class="mobile-avatar">' + initials + '</span>' +
+                '<span class="mobile-name">' + fullName + '</span>' +
+              '</div>' +
+              '<a href="dashboard.html" class="mobile-nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>' +
+              '<a href="register.html" class="mobile-nav-link"><i class="fas fa-user-edit"></i> My Profile</a>' +
+              '<a href="#" class="mobile-nav-link logout-link" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i> Logout</a>' +
+            '</div>';
+          console.log('✅ Mobile navigation updated');
+        }
+      })
+      .catch(function(err) {
+        console.log('ℹ️ User not logged in:', err.message);
+        // User not logged in - default state already set
+      });
+  })();
+
+  // Toggle profile dropdown
+  function toggleProfileDropdown(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var dropdown = document.getElementById('profile-dropdown');
+    if (dropdown) {
+      dropdown.classList.toggle('show');
+      console.log('🔽 Dropdown toggled');
+    }
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    var dropdown = document.getElementById('profile-dropdown');
+    if (dropdown && !e.target.closest('.nav-profile-dropdown')) {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  function handleLogout(e) {
+    e.preventDefault();
+    if (confirm('Are you sure you want to logout?')) {
+      fetch('/api/logout', { method: 'POST' })
+        .then(function() {
+          window.location.href = 'index.html';
+        })
+        .catch(function() {
+          window.location.href = 'index.html';
+        });
+    }
+  }
+</script>

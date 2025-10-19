@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Admin Panel - APU Tigers Basketball</title>
+  <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="touch-gestures.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="loader.js"></script>
+    <script src="touch-gestures.js"></script>
+  </head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <main class="main-content">
+    <div class="admin-container">
+      <div class="admin-header">
+        <h1 class="admin-title"><i class="fas fa-shield-alt"></i> Admin Control Panel</h1>
+        <p class="admin-subtitle">Manage users, content, and website settings</p>
+      </div>
+
+      <!-- Admin Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="users">
+          <i class="fas fa-users"></i> User Management
+        </button>
+        <button class="admin-tab" data-tab="content">
+          <i class="fas fa-file-alt"></i> Content Management
+        </button>
+        <button class="admin-tab" data-tab="settings">
+          <i class="fas fa-cog"></i> Settings
+        </button>
+        <button class="admin-tab" data-tab="analytics">
+          <i class="fas fa-chart-line"></i> Analytics
+        </button>
+      </div>
+
+      <!-- User Management Tab -->
+      <div id="users-tab" class="admin-tab-content active">
+        <div class="admin-section">
+          <div class="section-header">
+            <h2><i class="fas fa-users-cog"></i> Registered Users</h2>
+            <div class="admin-actions">
+              <input type="text" id="user-search" class="admin-search" placeholder="Search users...">
+              <button class="btn-admin" id="refresh-users">
+                <i class="fas fa-sync-alt"></i> Refresh
+              </button>
+            </div>
+          </div>
+
+          <!-- Users Table -->
+          <div class="admin-table-container">
+            <table class="admin-table" id="users-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Verified</th>
+                  <th>Registered</th>
+                  <th>Last Login</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="users-tbody">
+                <tr>
+                  <td colspan="8" class="loading-cell">
+                    <i class="fas fa-spinner fa-spin"></i> Loading users...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" id="users-pagination"></div>
+        </div>
+      </div>
+
+      <!-- Content Management Tab -->
+      <div id="content-tab" class="admin-tab-content">
+        <div class="admin-section">
+          <h2><i class="fas fa-newspaper"></i> Content Management</h2>
+          
+          <div class="content-grid">
+            <div class="content-card">
+              <i class="fas fa-images fa-3x"></i>
+              <h3>Gallery Images</h3>
+              <p>Manage gallery photos</p>
+              <button class="btn-admin-outline">Manage</button>
+            </div>
+            
+            <div class="content-card">
+              <i class="fas fa-newspaper fa-3x"></i>
+              <h3>News Articles</h3>
+              <p>Create and edit news</p>
+              <button class="btn-admin-outline">Manage</button>
+            </div>
+            
+            <div class="content-card">
+              <i class="fas fa-calendar-alt fa-3x"></i>
+              <h3>Events</h3>
+              <p>Manage upcoming events</p>
+              <button class="btn-admin-outline">Manage</button>
+            </div>
+            
+            <div class="content-card">
+              <i class="fas fa-trophy fa-3x"></i>
+              <h3>Achievements</h3>
+              <p>Add team achievements</p>
+              <button class="btn-admin-outline">Manage</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div id="settings-tab" class="admin-tab-content">
+        <div class="admin-section">
+          <h2><i class="fas fa-cog"></i> Website Settings</h2>
+          
+          <div class="settings-form">
+            <div class="setting-group">
+              <label>Site Title</label>
+              <input type="text" class="admin-input" value="APU Tigers Basketball Club">
+            </div>
+            
+            <div class="setting-group">
+              <label>Site Description</label>
+              <textarea class="admin-textarea" rows="3">Building champions on and off the court since 2010</textarea>
+            </div>
+            
+            <div class="setting-group">
+              <label>Contact Email</label>
+              <input type="email" class="admin-input" value="tigers@apu.edu.my">
+            </div>
+            
+            <div class="setting-group">
+              <label>Enable User Registration</label>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            
+            <div class="setting-group">
+              <label>Email Verification Required</label>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            
+            <button class="btn-admin">
+              <i class="fas fa-save"></i> Save Settings
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics Tab -->
+      <div id="analytics-tab" class="admin-tab-content">
+        <div class="admin-section">
+          <h2><i class="fas fa-chart-line"></i> Website Analytics</h2>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <i class="fas fa-users"></i>
+              <div class="stat-info">
+                <h3 id="total-users">0</h3>
+                <p>Total Users</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <i class="fas fa-user-check"></i>
+              <div class="stat-info">
+                <h3 id="verified-users">0</h3>
+                <p>Verified Users</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <i class="fas fa-user-clock"></i>
+              <div class="stat-info">
+                <h3 id="active-today">0</h3>
+                <p>Active Today</p>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <i class="fas fa-user-plus"></i>
+              <div class="stat-info">
+                <h3 id="new-this-month">0</h3>
+                <p>New This Month</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit User Modal -->
+  <div id="edit-user-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-user-edit"></i> Edit User</h3>
+        <button class="modal-close" onclick="closeEditModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-user-form">
+          <input type="hidden" id="edit-user-id">
+          
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="edit-fullname" class="admin-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="edit-email" class="admin-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Role</label>
+            <select id="edit-role" class="admin-input">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+              <option value="moderator">Moderator</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="edit-verified">
+              Email Verified
+            </label>
+          </div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+            <button type="submit" class="btn-admin">
+              <i class="fas fa-save"></i> Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container-custom">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <img src="assets/logo.jpeg" alt="APU Tigers Logo" class="logo-img">
+            </div>
+            <div class="footer-logo-text">
+              <h3 class="footer-title">APU Tigers</h3>
+              <p class="footer-subtitle">Basketball Club</p>
+            </div>
+          </div>
+          <p class="footer-description">Building champions on and off the court since 2010.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2025 APU Tigers Basketball Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="theme-toggle.js"></script>
+  <script src="script.js"></script>
+  <script src="nav-auth.js"></script>
+  <script src="admin.js"></script>
+  <script>
+    // Load navigation
+    (function(){
+      var p = document.getElementById('nav-placeholder');
+      fetch('nav.html')
+        .then(function(res) { return res.text(); })
+        .then(function(html) {
+          p.innerHTML = html;
+          var links = p.querySelectorAll('.nav-link, .mobile-nav-link');
+          var path = window.location.pathname.split('/').pop() || 'index.html';
+          links.forEach(function(link) {
+            if (link.getAttribute('href').split('/').pop() === path) {
+              link.classList.add('active');
+            }
+          });
+        })
+        .catch(function() { /* fail silently */ });
+    })();
+  </script>
+</body>
+</html>

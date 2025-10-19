@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Sign Up • APU Tigers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="touch-gestures.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      .auth-form-container {
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+      .auth-card {
+        background: hsl(var(--card));
+        padding: 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-xl);
+      }
+      .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .auth-header h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: hsl(var(--primary));
+      }
+      .auth-header p {
+        color: hsl(var(--muted-foreground));
+      }
+      .form-field {
+        margin-bottom: 1.5rem;
+      }
+      .form-field label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: hsl(var(--foreground));
+      }
+      .form-field input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        font-size: 1rem;
+        transition: all var(--transition-base);
+      }
+      .form-field input:focus {
+        outline: none;
+        border-color: hsl(var(--primary));
+        box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+      }
+      .submit-btn {
+        width: 100%;
+        padding: 0.875rem;
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+        border: none;
+        border-radius: var(--radius);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all var(--transition-base);
+        box-shadow: var(--shadow-lg);
+      }
+      .submit-btn:hover {
+        background-color: hsl(var(--secondary-glow));
+        transform: scale(1.02);
+      }
+      .auth-message {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: var(--radius);
+        font-size: 0.875rem;
+        text-align: center;
+      }
+      .auth-message.success {
+        background-color: hsl(var(--success) / 0.1);
+        color: hsl(var(--success));
+      }
+      .auth-message.error {
+        background-color: hsl(var(--destructive) / 0.1);
+        color: hsl(var(--destructive));
+      }
+      .auth-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: hsl(var(--muted-foreground));
+      }
+      .auth-footer a {
+        color: hsl(var(--secondary));
+        font-weight: 600;
+        text-decoration: none;
+        transition: color var(--transition-base);
+      }
+      .auth-footer a:hover {
+        color: hsl(var(--secondary-glow));
+      }
+    </style>
+      <script src="loader.js"></script>
+    <script src="touch-gestures.js"></script>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <script>
+      (function() {
+        var p = document.getElementById('nav-placeholder');
+        if (!p) return;
+        fetch('nav.html')
+          .then(function(res) { return res.text(); })
+          .then(function(html) {
+            p.innerHTML = html;
+            var links = p.querySelectorAll('.nav-link, .mobile-nav-link');
+            var path = window.location.pathname.split('/').pop() || 'index.html';
+            links.forEach(function(link) {
+              if (link.getAttribute('href').split('/').pop() === path) {
+                link.classList.add('active');
+              }
+            });
+          })
+          .catch(function() { /* fail silently */ });
+      })();
+    </script>
+
+    <main class="main-content">
+      <div class="page-hero">
+        <div class="container-custom">
+          <h1 class="page-title">Create <span class="text-secondary">Account</span></h1>
+          <p class="page-subtitle">Join the APU Tigers Basketball community</p>
+        </div>
+      </div>
+
+      <section class="section-padding">
+        <div class="auth-form-container">
+          <div class="auth-card">
+            <div class="auth-header">
+              <h2>Sign Up</h2>
+              <p>Enter your details to create an account</p>
+            </div>
+
+            <form id="signup-form">
+              <div class="form-field">
+                <label for="fullName">Full Name</label>
+                <input id="fullName" name="fullName" type="text" placeholder="John Doe" required>
+              </div>
+
+              <div class="form-field">
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required>
+              </div>
+
+              <div class="form-field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="••••••••" required>
+              </div>
+
+              <button type="submit" class="submit-btn">
+                <i class="fas fa-user-plus"></i> Create Account
+              </button>
+
+              <div id="auth-message" class="auth-message" style="display: none;"></div>
+            </form>
+
+            <div class="auth-footer">
+              <p>Already have an account? <a href="login.html">Log in</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container-custom">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-logo">
+              <div class="logo-icon">
+                <img src="assets/logo.jpeg" alt="APU Tigers Logo" class="logo-img">
+              </div>
+              <div class="footer-logo-text">
+                <h3 class="footer-title">APU Tigers</h3>
+                <p class="footer-subtitle">Basketball Club</p>
+              </div>
+            </div>
+            <p class="footer-description">Building champions on and off the court since 2010.</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 APU Tigers Basketball Club. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="theme-toggle.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const msgEl = document.getElementById('auth-message');
+        
+        msgEl.style.display = 'none';
+        msgEl.className = 'auth-message';
+        
+        if (!email || !password) {
+          msgEl.textContent = 'Email and password are required';
+          msgEl.classList.add('error');
+          msgEl.style.display = 'block';
+          return;
+        }
+
+        try {
+          const res = await fetch('/api/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, fullName })
+          });
+          const data = await res.json();
+          
+          if (res.ok) {
+            msgEl.textContent = '✓ Account created successfully! Redirecting...';
+            msgEl.classList.add('success');
+            msgEl.style.display = 'block';
+            setTimeout(() => location.href = 'dashboard.html', 1200);
+          } else {
+            msgEl.textContent = data.message || 'Sign up failed. Please try again.';
+            msgEl.classList.add('error');
+            msgEl.style.display = 'block';
+          }
+        } catch (e) {
+          msgEl.textContent = 'Network error. Please check your connection.';
+          msgEl.classList.add('error');
+          msgEl.style.display = 'block';
+        }
+      });
+    </script>
+    <script src="nav-auth.js"></script>
+  </body>
+</html>

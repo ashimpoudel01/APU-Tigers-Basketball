@@ -1,0 +1,514 @@
+/**
+ * Touch Gestures Styles
+ * APU Tigers Basketball Club
+ */
+
+/* ============================================
+   PULL-TO-REFRESH INDICATOR
+   ============================================ */
+
+.pull-to-refresh-indicator {
+  position: fixed;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  transform: translateY(0);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pull-to-refresh-indicator.ready {
+  background: linear-gradient(180deg, #4caf50, #45a049);
+}
+
+.pull-to-refresh-indicator.refreshing {
+  transform: translateY(80px) !important;
+  opacity: 1 !important;
+}
+
+.pull-refresh-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pull-refresh-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.pull-refresh-text {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   TOUCH RIPPLE EFFECT
+   ============================================ */
+
+.touch-ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleAnimation 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleAnimation {
+  to {
+    transform: translate(-50%, -50%) scale(15);
+    opacity: 0;
+  }
+}
+
+/* Dark mode ripple */
+.dark .touch-ripple {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   SWIPEABLE ELEMENTS
+   ============================================ */
+
+.swipeable {
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.swipeable:active {
+  cursor: grabbing;
+}
+
+.swipeable.dragging {
+  transition: none !important;
+}
+
+/* ============================================
+   CAROUSEL TOUCH ENHANCEMENTS
+   ============================================ */
+
+.hero-carousel,
+.carousel,
+.slider {
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hero-carousel .hero-slides,
+.carousel .slides {
+  will-change: transform;
+}
+
+/* Touch indicators for carousel */
+.carousel-touch-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hero-carousel:active .carousel-touch-indicator,
+.carousel:active .carousel-touch-indicator {
+  opacity: 1;
+}
+
+.carousel-touch-dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.carousel-touch-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: white;
+}
+
+/* ============================================
+   IMAGE ZOOM ENHANCEMENTS
+   ============================================ */
+
+.gallery-image,
+.news-image,
+.event-image,
+img[data-zoomable] {
+  touch-action: pinch-zoom;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+  position: relative;
+}
+
+.gallery-image.zoomed,
+.news-image.zoomed,
+.event-image.zoomed,
+img[data-zoomable].zoomed {
+  cursor: zoom-out;
+  z-index: 9999;
+}
+
+/* Zoom overlay */
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.zoom-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================
+   MOBILE MENU TOUCH ENHANCEMENTS
+   ============================================ */
+
+.mobile-nav,
+.mobile-menu {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
+/* Swipe indicator for mobile menu */
+.mobile-menu-swipe-indicator {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin: 12px auto;
+  transition: background 0.3s ease;
+}
+
+.mobile-menu:active .mobile-menu-swipe-indicator {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   LONG PRESS EFFECT
+   ============================================ */
+
+[data-long-press] {
+  position: relative;
+  transition: transform 0.1s ease;
+}
+
+[data-long-press]:active {
+  transform: scale(0.98);
+}
+
+[data-long-press].long-pressed {
+  transform: scale(0.95);
+  filter: brightness(0.9);
+}
+
+/* Long press feedback ring */
+[data-long-press]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 2px solid hsl(var(--primary));
+  border-radius: inherit;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+[data-long-press].long-pressed::after {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 0.5;
+}
+
+/* ============================================
+   TOUCH-FRIENDLY BUTTONS
+   ============================================ */
+
+/* Larger touch targets for mobile */
+@media (max-width: 768px) {
+  .btn,
+  .nav-link,
+  .mobile-nav-link {
+    min-height: 44px; /* iOS recommended minimum */
+    min-width: 44px;
+    padding: 12px 20px;
+  }
+  
+  .carousel-btn-prev,
+  .carousel-btn-next {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .back-to-top {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Active state feedback */
+.btn:active,
+.nav-link:active,
+.card:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* ============================================
+   MOMENTUM SCROLLING
+   ============================================ */
+
+body,
+.main-content,
+.modal-content,
+.mobile-nav {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Smooth scrolling for mobile */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove fixed positioning - it was preventing scroll */
+/* 
+body {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-content {
+  height: 100vh;
+  overflow-y: auto;
+}
+*/
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  body {
+    position: static;
+    overflow-y: auto;
+    height: auto;
+  }
+  
+  .main-content {
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+/* ============================================
+   SWIPE INDICATORS
+   ============================================ */
+
+.swipe-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  animation: swipeHintPulse 2s infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes swipeHintPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.swipe-hint i {
+  animation: swipeHintArrow 1.5s infinite;
+}
+
+@keyframes swipeHintArrow {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+}
+
+/* Hide swipe hint after first interaction */
+.swipe-hint.hidden {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* ============================================
+   HAPTIC FEEDBACK INDICATOR
+   ============================================ */
+
+.haptic-feedback {
+  animation: hapticPulse 0.3s ease;
+}
+
+@keyframes hapticPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+}
+
+/* ============================================
+   SCROLL SNAP (Optional)
+   ============================================ */
+
+.scroll-snap-container {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Prevent text selection during gestures */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
+  /* Allow text selection for content */
+  p,
+  span,
+  h1, h2, h3, h4, h5, h6,
+  input,
+  textarea {
+    -webkit-user-select: text;
+    user-select: text;
+    -webkit-touch-callout: default;
+  }
+  
+  /* Smooth font rendering on mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Improve touch performance */
+  .btn,
+  .card,
+  .nav-link,
+  a {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* ============================================
+   DARK MODE ADJUSTMENTS
+   ============================================ */
+
+.dark .pull-to-refresh-indicator {
+  background: linear-gradient(180deg, hsl(var(--primary)), hsl(237 50% 25%));
+}
+
+.dark .carousel-touch-indicator {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark .swipe-hint {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .mobile-menu-swipe-indicator {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .touch-ripple,
+  .swipe-hint {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .pull-to-refresh-indicator {
+    border: 2px solid currentColor;
+  }
+  
+  .touch-ripple {
+    background: currentColor;
+  }
+}

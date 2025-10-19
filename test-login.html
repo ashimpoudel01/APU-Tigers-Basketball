@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Test - APU Tigers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #1a237e; }
+        h2 { color: #ff8800; }
+        .status { font-size: 18px; font-weight: bold; }
+        .logged-in { color: #28a745; }
+        .logged-out { color: #dc3545; }
+        button {
+            background: #ff8800;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover { background: #ff9920; }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏀 APU Tigers - Login Test</h1>
+    
+    <div class="box">
+        <h2>Current Login Status</h2>
+        <p class="status" id="status">Checking...</p>
+        <div id="user-info"></div>
+    </div>
+
+    <div class="box">
+        <h2>Quick Actions</h2>
+        <button onclick="window.location.href='login.html'">Go to Login Page</button>
+        <button onclick="window.location.href='signup.html'">Go to Signup Page</button>
+        <button onclick="window.location.href='index.html'">Go to Homepage</button>
+        <button onclick="testLogout()">Logout</button>
+    </div>
+
+    <div class="box">
+        <h2>Session Details</h2>
+        <pre id="session-details">Loading...</pre>
+    </div>
+
+    <script>
+        // Check login status
+        fetch('/api/me')
+            .then(res => {
+                if (res.ok) return res.json();
+                throw new Error('Not logged in');
+            })
+            .then(data => {
+                document.getElementById('status').innerHTML = 
+                    '<span class="logged-in">✅ You are LOGGED IN</span>';
+                document.getElementById('user-info').innerHTML = `
+                    <p><strong>Name:</strong> ${data.user.full_name}</p>
+                    <p><strong>Email:</strong> ${data.user.email}</p>
+                    <p><strong>User ID:</strong> ${data.user.id}</p>
+                `;
+                document.getElementById('session-details').textContent = 
+                    JSON.stringify(data, null, 2);
+            })
+            .catch(err => {
+                document.getElementById('status').innerHTML = 
+                    '<span class="logged-out">❌ You are NOT logged in</span>';
+                document.getElementById('user-info').innerHTML = 
+                    '<p>Please login to see user information</p>';
+                document.getElementById('session-details').textContent = 
+                    'No active session';
+            });
+
+        function testLogout() {
+            if (confirm('Logout now?')) {
+                fetch('/api/logout', { method: 'POST' })
+                    .then(() => {
+                        alert('Logged out successfully!');
+                        location.reload();
+                    })
+                    .catch(err => {
+                        alert('Error logging out');
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Dashboard • APU Tigers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="touch-gestures.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+      .dashboard-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 1rem;
+      }
+      .dashboard-title h1 {
+        font-size: 2.5rem;
+        color: hsl(var(--primary));
+      }
+      .dashboard-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+      .dashboard-btn {
+        padding: 0.625rem 1.25rem;
+        border-radius: var(--radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all var(--transition-base);
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .btn-primary {
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+        box-shadow: var(--shadow-md);
+      }
+      .btn-primary:hover {
+        background-color: hsl(var(--secondary-glow));
+        transform: scale(1.05);
+      }
+      .btn-secondary {
+        background-color: hsl(var(--muted));
+        color: hsl(var(--foreground));
+      }
+      .btn-secondary:hover {
+        background-color: hsl(var(--border));
+      }
+      .dashboard-card {
+        background: hsl(var(--card));
+        padding: 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-xl);
+        margin-bottom: 1.5rem;
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .user-avatar {
+        width: 80px;
+        height: 80px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: 700;
+        box-shadow: var(--shadow-glow);
+      }
+      .user-details h2 {
+        font-size: 1.75rem;
+        margin-bottom: 0.25rem;
+        color: hsl(var(--primary));
+      }
+      .user-details p {
+        color: hsl(var(--muted-foreground));
+        font-size: 1rem;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .info-item {
+        padding: 1rem;
+        background: hsl(var(--muted) / 0.3);
+        border-radius: var(--radius);
+      }
+      .info-item label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 0.25rem;
+      }
+      .info-item span {
+        font-size: 1.125rem;
+        color: hsl(var(--foreground));
+      }
+      .loading {
+        text-align: center;
+        padding: 3rem;
+        color: hsl(var(--muted-foreground));
+      }
+      .error-message {
+        background-color: hsl(var(--destructive) / 0.1);
+        color: hsl(var(--destructive));
+        padding: 1rem;
+        border-radius: var(--radius);
+        text-align: center;
+      }
+    </style>
+      <script src="loader.js"></script>
+    <script src="touch-gestures.js"></script>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <script>
+      (function() {
+        var p = document.getElementById('nav-placeholder');
+        if (!p) return;
+        fetch('nav.html')
+          .then(function(res) { return res.text(); })
+          .then(function(html) {
+            p.innerHTML = html;
+            var links = p.querySelectorAll('.nav-link, .mobile-nav-link');
+            var path = window.location.pathname.split('/').pop() || 'index.html';
+            links.forEach(function(link) {
+              if (link.getAttribute('href').split('/').pop() === path) {
+                link.classList.add('active');
+              }
+            });
+          })
+          .catch(function() { /* fail silently */ });
+      })();
+    </script>
+    <!-- Navigation Authentication Handler -->
+    <script src="nav-auth.js"></script>
+
+    <main class="main-content">
+      <div class="page-hero">
+        <div class="container-custom">
+          <h1 class="page-title">Your <span class="text-secondary">Dashboard</span></h1>
+          <p class="page-subtitle">Manage your account and preferences</p>
+        </div>
+      </div>
+
+      <section class="section-padding">
+        <div class="dashboard-container">
+          <div class="dashboard-header">
+            <div class="dashboard-title">
+              <h1>Welcome Back!</h1>
+            </div>
+            <div class="dashboard-actions">
+              <button id="refresh-btn" class="dashboard-btn btn-secondary">
+                <i class="fas fa-sync-alt"></i> Refresh
+              </button>
+              <button id="logout-btn" class="dashboard-btn btn-primary">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </button>
+            </div>
+          </div>
+
+          <div id="dashboard-content">
+            <div class="loading">
+              <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: hsl(var(--secondary));"></i>
+              <p>Loading your dashboard...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container-custom">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-logo">
+              <div class="logo-icon">
+                <img src="assets/logo.jpeg" alt="APU Tigers Logo" class="logo-img">
+              </div>
+              <div class="footer-logo-text">
+                <h3 class="footer-title">APU Tigers</h3>
+                <p class="footer-subtitle">Basketball Club</p>
+              </div>
+            </div>
+            <p class="footer-description">Building champions on and off the court since 2010.</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 APU Tigers Basketball Club. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="theme-toggle.js"></script>
+    <script src="script.js"></script>
+    <script>
+      async function loadUserData() {
+        const contentEl = document.getElementById('dashboard-content');
+        
+        try {
+          const res = await fetch('/api/me');
+          const data = await res.json();
+          
+          if (!res.ok || !data.authenticated) {
+            contentEl.innerHTML = `
+              <div class="dashboard-card">
+                <div class="error-message">
+                  <i class="fas fa-exclamation-triangle"></i> 
+                  You are not authenticated. Please log in to access your dashboard.
+                  <br><br>
+                  <a href="login.html" class="btn-hero" style="display: inline-block; margin-top: 0.5rem;">Go to Login</a>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const user = data.user;
+          const initials = user.fullName 
+            ? user.fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+            : user.email[0].toUpperCase();
+
+          contentEl.innerHTML = `
+            <div class="dashboard-card">
+              <div class="user-info">
+                <div class="user-avatar">${initials}</div>
+                <div class="user-details">
+                  <h2>${user.fullName || 'User'}</h2>
+                  <p><i class="fas fa-envelope"></i> ${user.email}</p>
+                </div>
+              </div>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <label><i class="fas fa-id-badge"></i> Member ID</label>
+                  <span>#${user.id}</span>
+                </div>
+                <div class="info-item">
+                  <label><i class="fas fa-user-check"></i> Account Status</label>
+                  <span style="color: hsl(var(--success));">Active</span>
+                </div>
+                <div class="info-item">
+                  <label><i class="fas fa-calendar-alt"></i> Member Since</label>
+                  <span>2025</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <h3 style="margin-bottom: 1rem; color: hsl(var(--primary));">
+                <i class="fas fa-basketball-ball"></i> Quick Links
+              </h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <a href="register.html" class="btn-hero">Register for Team</a>
+                <a href="events.html" class="btn-hero-outline" style="color: hsl(var(--secondary)); border-color: hsl(var(--secondary));">View Events</a>
+                <a href="training.html" class="btn-hero-outline" style="color: hsl(var(--secondary)); border-color: hsl(var(--secondary));">Training Schedule</a>
+              </div>
+            </div>
+          `;
+        } catch (e) {
+          contentEl.innerHTML = `
+            <div class="dashboard-card">
+              <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> 
+                Failed to load dashboard. Please check your connection and try again.
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      document.getElementById('refresh-btn').addEventListener('click', loadUserData);
+      
+      document.getElementById('logout-btn').addEventListener('click', async () => {
+        try {
+          await fetch('/api/logout', { method: 'POST' });
+          window.location.href = 'login.html';
+        } catch (e) {
+          alert('Failed to logout. Please try again.');
+        }
+      });
+
+      // Load user data on page load
+      loadUserData();
+    </script>
+  </body>
+</html>
